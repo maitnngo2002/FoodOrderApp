@@ -49,11 +49,12 @@ public class SignIn extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        // Check if user not exist in database
+                        // Check if user not exist in databases
                         if (dataSnapshot.child(edtPhone.getText().toString()).exists()) {
                             // Get User information
                             mDialog.dismiss();
                             User user = dataSnapshot.child(edtPhone.getText().toString()).getValue(User.class);
+                            user.setPhone(edtPhone.getText().toString());
                             if (user.getPassword().equals(edtPassword.getText().toString())) {
                                 {
                                     Intent homeIntent = new Intent(SignIn.this, Home.class);

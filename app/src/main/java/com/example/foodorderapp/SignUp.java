@@ -51,7 +51,7 @@ public class SignUp extends AppCompatActivity {
                             Toast.makeText(SignUp.this, "Phone number already exists", Toast.LENGTH_SHORT).show();
                         } else {
                             mDialog.dismiss();
-                            User user = new User(edtPhone.getText().toString(), edtPassword.getText().toString());
+                            User user = new User(edtName.getText().toString(), edtPassword.getText().toString());
                             table_user.child(edtPhone.getText().toString()).setValue(user);
                             Toast.makeText(SignUp.this, "Sign up sucessfully!", Toast.LENGTH_SHORT).show();
                             finish();
