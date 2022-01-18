@@ -25,6 +25,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
+import androidx.core.view.GravityCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -81,6 +82,10 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         });
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+
+        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.bringToFront();
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -127,7 +132,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                         // Because Category ID is key, we just get key of this item
                         foodList.putExtra("CategoryID", adapter.getRef(position).getKey());
                         startActivity(foodList);
-
                     }
                 });
             }
@@ -144,7 +148,31 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        return false;
+        // Handle navigation view item clicks here
+        int id = menuItem.getItemId();
+
+        if (id == R.id.nav_menu) {
+
+        } else if (id == R.id.nav_cart) {
+            Intent cartIntent = new Intent(Home.this, Cart.class);
+            startActivity(cartIntent);
+        } else if (id == R.id.nav_orders) {
+            Intent orderIntent = new Intent(Home.this, OrderStatus.class);
+            startActivity(orderIntent);
+        } else if (id == R.id.nav_log_out) {
+            Intent signIn = new Intent(Home.this, SignIn.class);
+            signIn.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(signIn);
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 }

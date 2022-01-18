@@ -25,6 +25,7 @@
         android:background="@color/overlayBackground"
         app:itemTextColor="@android:color/white"
         app:itemIconTint="@android:color/white"
-        
+
         app:menu="@menu/activity_main_drawer" />
+
 </androidx.drawerlayout.widget.DrawerLayout>
