@@ -127,7 +127,7 @@ public class FoodList extends AppCompatActivity {
     }
 
     private void startSearch(CharSequence charSequence) {
-        FirebaseRecyclerOptions<Food> options = new FirebaseRecyclerOptions.Builder<Food>().setQuery(foodList.orderByChild("Name").equalTo(charSequence.toString()), Food.class).build();
+        FirebaseRecyclerOptions<Food> options = new FirebaseRecyclerOptions.Builder<Food>().setQuery(foodList.orderByChild("name").equalTo(charSequence.toString()), Food.class).build();
         searchAdapter = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(options) {
 
             @NonNull
@@ -150,7 +150,7 @@ public class FoodList extends AppCompatActivity {
                         // Start new activity to show the food's information
                         Intent foodDetail = new Intent(FoodList.this, FoodDetail.class);
                         // Send FoodID to the new activity
-                        foodDetail.putExtra("FoodID", searchAdapter.getRef(position).getKey());
+                        foodDetail.putExtra("foodID", searchAdapter.getRef(position).getKey());
                         startActivity(foodDetail);
                     }
                 });
@@ -160,7 +160,7 @@ public class FoodList extends AppCompatActivity {
         recyclerView.setAdapter(searchAdapter);
     }
     private void loadSuggest() {
-        foodList.orderByChild("MenuID").equalTo(categoryId)
+        foodList.orderByChild("menuID").equalTo(categoryId)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -177,7 +177,7 @@ public class FoodList extends AppCompatActivity {
     }
 
     private void loadListFood(String categoryId) {
-        FirebaseRecyclerOptions<Food> options = new FirebaseRecyclerOptions.Builder<Food>().setQuery(foodList.orderByChild("MenuID").equalTo(categoryId), Food.class).build();
+        FirebaseRecyclerOptions<Food> options = new FirebaseRecyclerOptions.Builder<Food>().setQuery(foodList.orderByChild("menuID").equalTo(categoryId), Food.class).build();
 
         adapter = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(options) {
 
@@ -202,7 +202,7 @@ public class FoodList extends AppCompatActivity {
                         // Start new activity to show the food's information
                         Intent foodDetail = new Intent(FoodList.this, FoodDetail.class);
                         // Send FoodID to the new activity
-                        foodDetail.putExtra("FoodID", adapter.getRef(position).getKey());
+                        foodDetail.putExtra("foodID", adapter.getRef(position).getKey());
                         startActivity(foodDetail);
                     }
                 });

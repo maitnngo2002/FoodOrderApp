@@ -53,7 +53,7 @@ public class FoodDetail extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 new Database(getBaseContext()).addToCart(new Order(
-                    foodID, currentFood.getName(), numberButton.getNumber(),
+                        foodID, currentFood.getName(), numberButton.getNumber(),
                         currentFood.getPrice(), currentFood.getDiscount()
                 ));
 
@@ -71,7 +71,7 @@ public class FoodDetail extends AppCompatActivity {
 
         // Get Food ID from Intent
         if (getIntent() != null) {
-            foodID = getIntent().getStringExtra("FoodID");
+            foodID = getIntent().getStringExtra("foodID");
         }
         if (!foodID.isEmpty()) {
             getFoodDetail(foodID);
