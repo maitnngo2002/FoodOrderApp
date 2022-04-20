@@ -16,6 +16,7 @@ import com.example.foodorderapp.Common.Common;
 import com.example.foodorderapp.Common.Interface.ItemClickListener;
 import com.example.foodorderapp.Model.Category;
 import com.example.foodorderapp.Model.User;
+import com.example.foodorderapp.Service.ListenOrder;
 import com.example.foodorderapp.ViewHolder.MenuViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -105,6 +106,10 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         recycler_menu.setLayoutManager(layoutManager);
 
         loadMenu();
+
+        // Register Service
+        Intent service = new Intent(Home.this, ListenOrder.class);
+        startService(service);
     }
 
     private void loadMenu() {
